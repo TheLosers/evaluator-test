@@ -20,6 +20,11 @@ Run the API:
 uvicorn app.main:app --reload
 ```
 
+### Configuration
+
+Set `METRIC_TIMEOUT` (seconds) to control how long each metric evaluation is allowed to run.
+The default is 10 seconds.
+
 ## API
 `POST /evaluate` expects a JSON body:
 ```json
