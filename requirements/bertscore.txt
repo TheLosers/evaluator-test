@@ -1,2 +1,2 @@
-bertscore==0.3.13
+bert-score==0.3.13
 torch>=1.13.0
