@@ -10,7 +10,7 @@ class BertScoreMetric(Metric):
         except ImportError as e:
             raise ImportError("bertscore library is not installed") from e
 
-        P, R, F1 = score([prediction], [reference], lang="en", model_type="bert-base-uncased")
+        P, R, F1 = score([prediction], [reference], lang="ko", model_type="bert-base-uncased")
         return float(F1.mean())
 
 
