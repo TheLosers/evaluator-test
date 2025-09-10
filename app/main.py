@@ -9,6 +9,11 @@ from .metrics import MetricRegistry
 
 app = FastAPI()
 
+@app.on_event("startup")
+def load_summac_model() -> None:
+    MetricRegistry.get("summac")
+
+
 
 _translator = GoogleTranslator(source="auto", target="ko")
 
