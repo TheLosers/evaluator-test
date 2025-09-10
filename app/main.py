@@ -1,14 +1,35 @@
 from typing import List, Dict
+
 import asyncio
 import logging
 import os
+import re
+
 
 from fastapi import FastAPI, HTTPException, Request, Response
 from pydantic import BaseModel
+from deep_translator import GoogleTranslator
 
 from .metrics import MetricRegistry
 
 app = FastAPI()
+
+@app.on_event("startup")
+def load_summac_model() -> None:
+    MetricRegistry.get("summac")
+
+
+_translator = GoogleTranslator(source="auto", target="ko")
+
+
+def _maybe_translate(text: str) -> str:
+    """Translate English text to Korean before evaluation."""
+    if re.search(r"[A-Za-z]", text):
+        try:
+            return _translator.translate(text)
+        except Exception:
+            return text
+    return text
 
 
 METRIC_TIMEOUT = float(os.getenv("METRIC_TIMEOUT", "10"))
