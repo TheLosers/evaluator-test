@@ -7,6 +7,11 @@ from .metrics import MetricRegistry
 
 app = FastAPI()
 
+@app.on_event("startup")
+def load_summac_model() -> None:
+    MetricRegistry.get("summac")
+
+
 
 class EvaluationRequest(BaseModel):
     candidate: str
