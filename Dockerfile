@@ -20,4 +20,4 @@ ENV OMP_NUM_THREADS=1
 ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:32
 
 # Run with more memory (for Docker command)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
